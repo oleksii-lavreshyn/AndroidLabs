@@ -1,0 +1,23 @@
+{
+  "expo": {
+    "name": "Трекер фільмів",
+    "slug": "movie-tracker",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "scheme": "movietracker",
+    "userInterfaceStyle": "automatic",
+    "newArchEnabled": true,
+    "android": {
+      "package": "com.university.movietracker",
+      "permissions": ["POST_NOTIFICATIONS", "RECEIVE_BOOT_COMPLETED"]
+    },
+    "plugins": [
+      "expo-router",
+      "expo-secure-store",
+      "expo-background-task",
+      ["expo-notifications", { "defaultChannel": "new-releases" }],
+      ["expo-build-properties", { "android": { "usesCleartextTraffic": true } }]
+    ],
+    "experiments": { "typedRoutes": true }
+  }
+}

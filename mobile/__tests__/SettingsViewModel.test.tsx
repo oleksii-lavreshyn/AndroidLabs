@@ -1,0 +1,4 @@
+import { act,renderHook,waitFor } from '@testing-library/react-native';
+jest.mock('@/utils/backgroundTasks',()=>({runReleaseCheck:jest.fn()}));
+const mockLogout=jest.fn();const mockGet=jest.fn(async()=> 'saved-token');const mockSet=jest.fn();const mockRunReleaseCheck=jest.fn(async()=>2);import { useSettingsViewModel } from '@/viewmodels/useSettingsViewModel';
+it('loads and securely saves token, then runs release worker',async()=>{const{result}=renderHook(()=>useSettingsViewModel({auth:{logout:mockLogout} as never,storage:{get:mockGet,set:mockSet} as never,releaseCheck:mockRunReleaseCheck}));await waitFor(()=>expect(result.current.token).toBe('saved-token'));await act(async()=>result.current.save());expect(mockSet).toHaveBeenCalledWith('tmdbToken','saved-token');await act(async()=>result.current.check());expect(result.current.message).toBe('Знайдено нових релізів: 2');});
